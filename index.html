@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="map"></div>
+        <div id="comparison">
+            <table>
+                <thead>
+                    <tr>
+                        <th id="city1_name"></th>
+                        <th></th>
+                        <th id="city2_name"></th>
+                    </tr>
+                    <tr>
+                        <th id="city1_summary"></th>
+                        <th></th>
+                        <th id="city2_summary"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="city1_temperature"></td>
+                        <td id="compr_temperature"></td>
+                        <td id="city2_temperature"></td>
+                    </tr>
+                    <tr>
+                        <td id="city1_humidity"></td>
+                        <td id="compr_humidity"></td>
+                        <td id="city2_humidity"></td>
+                    </tr>
+                    <tr>
+                        <td id="city1_pressure"></td>
+                        <td id="compr_pressure"></td>
+                        <td id="city2_pressure"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script src='scripts.js'></script>
+</html>
