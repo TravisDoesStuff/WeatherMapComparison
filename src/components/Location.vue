@@ -1,6 +1,6 @@
 <template>
   <div class='location'>
-    <LocationMap />
+    <LocationMap :side='side' />
   </div>
 </template>
 
@@ -11,13 +11,16 @@ export default {
   name: 'Location',
   components: {
     LocationMap
-  }
+  },
+  props: [
+    'side'
+  ]
 }
 </script>
 
 <style scoped>
 .location {
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  height: 300px;
 }
 </style>

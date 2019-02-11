@@ -1,5 +1,6 @@
 require('dotenv').config()
 import Vue from 'vue'
+import store from './store/store'
 import { L } from 'vue2-leaflet'
 import 'leaflet/dist/leaflet.css'
 import App from './App.vue'
@@ -17,4 +18,5 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
+  store,
 }).$mount('#app')

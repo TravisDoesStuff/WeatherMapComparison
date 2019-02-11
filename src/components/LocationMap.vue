@@ -4,12 +4,11 @@
       <l-tile-layer :url="url" :attribution="attribution" class="mapTile"></l-tile-layer>
       <l-marker :lat-lng="marker"></l-marker>
     </l-map>
-    {{ this.weatherData }}
   </div>
 </template>
 
 <script>
-import {LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import { L, LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import axios from 'axios';
 
 export default {
@@ -19,6 +18,9 @@ export default {
     LTileLayer,
     LMarker
   },
+  props: [
+    'side'
+  ],
   data() {
     return {
       zoom: 4,
@@ -42,11 +44,19 @@ export default {
       let corsProxy = 'https://cors-anywhere.herokuapp.com/';
       let darkSkyKey = process.env.VUE_APP_DARKSKY_KEY;
       let url = corsProxy+ 'https://api.darksky.net/forecast/'+darkSkyKey+'/'+this.location;
+      let setStoreMethod = '';
       
+      if(this.side === 'home') {
+        setStoreMethod = 'setHomeWeather';
+      }
+      else if(this.side === 'away') {
+        setStoreMethod = 'setAwayWeather';
+      }
+
       return axios.get(url)
         .then(response => {
-          this.weatherData = response.data.currently,
-          this.loading = false
+          this.$store.commit(setStoreMethod, response.data.currently);
+          this.loading = false;
         });
     }
   }
@@ -56,6 +66,6 @@ export default {
 <style scoped>
 .locationMap {
   width: 100%;
-  height: 25%;
+  height: 100%;
 }
 </style>
