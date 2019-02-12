@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  name: 'LocationMap',
+  name: 'DataRow',
   props: [
     'item'
   ]

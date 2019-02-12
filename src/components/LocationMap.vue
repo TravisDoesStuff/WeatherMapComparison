@@ -27,7 +27,7 @@ export default {
       center: L.latLng(40, -98),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:' &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      marker: L.latLng(40, -98),
+      marker: L.latLng(0, 0),
       location,
       weatherData: {},
       isLoading: false
@@ -39,6 +39,7 @@ export default {
       this.marker = L.latLng(this.location);
       this.loading = true;
       this.fetchWeatherData();
+      // this.fetchSunData();
     },
     fetchWeatherData() {
       let corsProxy = 'https://cors-anywhere.herokuapp.com/';

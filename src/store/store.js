@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import weatherFilter from '../data/filters/weather';
+
 Vue.use(Vuex);
 
 const state = {
   homeData: {
-    weather: {}
+    weather: {},
+    daylight: {}
   },
   awayData: {
-    weather: {}
+    weather: {},
+    daylight: {}
   }
 }
 
@@ -23,10 +27,24 @@ const getters = {
 
 const mutations = {
   setHomeWeather(state, data) {
-    state.homeData.weather = data;
+    state.homeData.weather = Object.keys(data)
+      .filter(key => weatherFilter.includes(key))
+      .reduce((obj, key) => {
+        return {
+          ...obj,
+          [key]: data[key]
+        }
+      }, {});
   },
   setAwayWeather(state, data) {
-    state.awayData.weather = data;
+    state.awayData.weather = Object.keys(data)
+      .filter(key => weatherFilter.includes(key))
+      .reduce((obj, key) => {
+        return {
+          ...obj,
+          [key]: data[key]
+        }
+      }, {});
   }
 }
 
