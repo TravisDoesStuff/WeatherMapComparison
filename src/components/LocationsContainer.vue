@@ -1,18 +1,18 @@
 <template>
   <div class='locationsContainer'>
-    <Location :side='side' />
-    <DataContainer :side='side' />
+    <LocationMap />
+    <DataContainer />
   </div>
 </template>
 
 <script>
-import Location from './Location.vue';
+import LocationMap from './LocationMap.vue';
 import DataContainer from './DataContainer.vue';
 
 export default {
   name: 'LocationsContainer',
   components: {
-    Location,
+    LocationMap,
     DataContainer,
   },
   props: [
@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 .locationsContainer {
-  width: 50%;
+  width: 960px;
   height: 100%;
 }
 </style>

@@ -2,7 +2,8 @@
   <div class='locationMap'>
     <l-map :zoom="zoom" :center="center" @click="handleMapClick">
       <l-tile-layer :url="url" :attribution="attribution" class="mapTile"></l-tile-layer>
-      <l-marker :lat-lng="marker"></l-marker>
+      <l-marker :lat-lng="homeMarker"></l-marker>
+      <l-marker :lat-lng="awayMarker"></l-marker>
     </l-map>
   </div>
 </template>
@@ -27,32 +28,45 @@ export default {
       center: L.latLng(40, -98),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:' &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      marker: L.latLng(0, 0),
-      location,
+      homeMarker: L.latLng(0, 0),
+      awayMarker: L.latLng(0, 0),
+      homeLocation: [],
+      awayLocation: [],
       weatherData: {},
       isLoading: false
     }
   },
   methods: {
     handleMapClick(e) {
-      this.location = [e.latlng.lat.toString(), e.latlng.lng.toString()];
-      this.marker = L.latLng(this.location);
       this.loading = true;
-      this.fetchWeatherData();
+      let newLocation = [e.latlng.lat.toString(), e.latlng.lng.toString()];
+      let isAway = false;
+
+      if(this.homeLocation.length === 0) {
+        this.homeLocation = newLocation;
+        this.homeMarker = L.latLng(newLocation);
+      }
+      else {
+        this.awayLocation = newLocation;
+        this.awayMarker = L.latLng(newLocation);
+        isAway = true;
+      }
+      
+      this.fetchWeatherData(isAway);
       // this.fetchSunData();
     },
-    fetchWeatherData() {
+    fetchWeatherData(isAway=false) {
+      let setStoreMethod = 'setHomeWeather';
+      let urlLocation = this.homeLocation;
+
+      if(isAway) {
+        setStoreMethod = 'setAwayWeather';
+        urlLocation = this.awayLocation;
+      }
+
       let corsProxy = 'https://cors-anywhere.herokuapp.com/';
       let darkSkyKey = process.env.VUE_APP_DARKSKY_KEY;
-      let url = corsProxy+ 'https://api.darksky.net/forecast/'+darkSkyKey+'/'+this.location;
-      let setStoreMethod = '';
-      
-      if(this.side === 'home') {
-        setStoreMethod = 'setHomeWeather';
-      }
-      else if(this.side === 'away') {
-        setStoreMethod = 'setAwayWeather';
-      }
+      let url = corsProxy+ 'https://api.darksky.net/forecast/'+darkSkyKey+'/'+urlLocation;
 
       return axios.get(url)
         .then(response => {
@@ -67,6 +81,6 @@ export default {
 <style scoped>
 .locationMap {
   width: 100%;
-  height: 100%;
+  height: 30%;
 }
 </style>
