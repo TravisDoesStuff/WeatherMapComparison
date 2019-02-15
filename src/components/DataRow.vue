@@ -2,9 +2,9 @@
   <div class='dataRow'>
     <div class='label'>{{ label }}</div>
     <div class='datas'>
-      <div class='dataParam'>{{ this.param }}</div>
+      <div class='dataParam'>{{ this.param +""+ this.unit() }}</div>
       <div class='dataParam'>{{ comparisonOperator }}</div>
-      <div class='dataParam'>{{ this.awayParam }}</div>
+      <div class='dataParam'>{{ this.awayParam +""+ this.unit() }}</div>
     </div>
   </div>
 </template>
@@ -18,15 +18,84 @@ export default {
   ],
   computed: {
     param() {
-      return this.$store.state.homeData.weather[this.label];
+      let param = this.$store.state.homeData.weather[this.label];
+      return this.format(param);
     },
     awayParam() {
-      return this.$store.state.awayData.weather[this.label];
+      let awayParam = this.$store.state.awayData.weather[this.label];
+      return this.format(awayParam);
     },
     comparisonOperator() {
-      return '=';
+      let operator = '';
+      if(!isNaN(this.param) && !isNaN(this.awayParam)) {
+        if(this.param > this.awayParam) {
+        operator = '>';
+        } else if(this.param < this.awayParam) {
+          operator = '<';
+        } else {
+          operator = '=';
+        }
+      }
+
+      return operator;
     }
-  }
+  },
+  methods: {
+    format(param) {
+      let formatted = param;
+      switch(this.label) {
+        case 'temperature':
+          formatted = Math.round(param);
+          break;
+        case 'dewPoint':
+          formatted = Math.round(param);
+          break;
+        case 'windSpeed':
+          formatted = Math.round(param);
+          break;
+        case 'cloudCover':
+          formatted = param*100;
+          break;
+        default:
+          break;
+      }
+
+      return formatted;
+    },
+    unit() {
+      let unit = "";
+      switch(this.label) {
+        case 'temperature':
+          unit = "°F";
+          break;
+        case 'dewPoint':
+          unit = "°F";
+          break;
+        case 'pressure':
+          unit = 'mb';
+          break;
+        case 'windSpeed':
+          unit = 'mph';
+          break;
+        case 'windBearing':
+          unit = '°';
+          break;
+        case 'cloudCover':
+          unit = '%';
+          break;
+        case 'visibility':
+          unit = ' miles';
+          break;
+        case 'ozone':
+          unit = ' DU';
+          break;
+        default:
+          break;
+      }
+
+      return unit;
+    }
+  },
 }
 </script>
 
@@ -37,7 +106,7 @@ export default {
 }
 .datas {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   padding: 5px 60px;
 }
 .label {
