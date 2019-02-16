@@ -5,6 +5,8 @@
     <a href='https://sunrise-sunset.org/'>Sunrise-Sunset</a>
     |
     <a href='https://developers.arcgis.com/rest/'>ArcGIS Rest API</a>
+    |
+    <a href='http://climateapi.scottpinkelman.com/'>Climate Zone API</a>
   </div>
 </template>
 

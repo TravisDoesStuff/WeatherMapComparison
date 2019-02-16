@@ -2,24 +2,30 @@
   <div class='summaryRow'>
     <div>
       <div class='locationHeader'>{{ this.$store.state.homeData.address }}</div>
-      <div>{{ this.$store.state.homeData.weather.icon }}</div>
+      <div><img class='weatherIcon' :src='getHomeIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.homeData.weather.summary }}</div>
     </div>
     <div />
     <div>
       <div class='locationHeader'>{{ this.$store.state.awayData.address }}</div>
-      <div>{{ this.$store.state.awayData.weather.icon }}</div>
+      <div><img class='weatherIcon' :src='getAwayIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.awayData.weather.summary }}</div>
     </div>
   </div>
 </template>
 
 <script>
-// icons:
-// clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
 
 export default {
-  name: 'SummaryRow'
+  name: 'SummaryRow',
+  methods: {
+    getHomeIcon() {
+      return require('../assets/icons/'+this.$store.state.homeData.weather.icon+'.png');
+    },
+    getAwayIcon() {
+      return require('../assets/icons/'+this.$store.state.awayData.weather.icon+'.png');
+    }
+  }
 }
 </script>
 
@@ -34,8 +40,12 @@ export default {
 .locationHeader {
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 .locationCondition {
   font-size: 24px;
+}
+.weatherIcon {
+  height: 80px;
 }
 </style>

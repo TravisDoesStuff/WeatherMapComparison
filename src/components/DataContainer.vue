@@ -23,7 +23,8 @@ const expandedLabels = [
   'Cloud Cover',
   'UV Index',
   'Visibility',
-  'Ozone'
+  'Ozone',
+  'Climate'
 ]
 
 export default {
@@ -51,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.dataContainer {
+  height: 400px;
+  overflow-y: scroll;
+}
 #expandButton {
   width: 100%;
 }

@@ -9,11 +9,13 @@ const state = {
   homeData: {
     address: '',
     weather: {},
+    climate: '',
     daylight: {}
   },
   awayData: {
     address: '',
     weather: {},
+    climate: '',
     daylight: {}
   }
 }
@@ -53,6 +55,12 @@ const mutations = {
   },
   setAwayAddress(state, data) {
     state.awayData.address = data;
+  },
+  setHomeClimate(state, data) {
+    state.homeData.climate = data;
+  },
+  setAwayClimate(state, data) {
+    state.awayData.climate = data;
   },
 }
 

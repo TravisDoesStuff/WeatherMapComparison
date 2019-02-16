@@ -18,10 +18,10 @@ export default {
   ],
   computed: {
     param() {
-      return this.format(this.$store.state.homeData.weather);
+      return this.format(this.$store.state.homeData);
     },
     awayParam() {
-      return this.format(this.$store.state.awayData.weather);
+      return this.format(this.$store.state.awayData);
     },
     comparisonOperator() {
       let operator = '';
@@ -39,40 +39,43 @@ export default {
     }
   },
   methods: {
-    format(weather) {
+    format(column) {
       let formatted = '';
       this.unit = '';
 
       switch(this.label) {
         case 'Temperature':
-          formatted = Math.round(weather.temperature);
+          formatted = Math.round(column.weather.temperature);
           this.unit = '°F';
           break;
         case 'Dew Point':
-          formatted = Math.round(weather.dewPoint);
+          formatted = Math.round(column.weather.dewPoint);
           this.unit = '°F';
           break;
         case 'Pressure':
-          formatted = Math.round(weather.pressure);
+          formatted = Math.round(column.weather.pressure);
           this.unit = 'mb';
           break;
         case 'Wind':
-          formatted = this.formatWind(weather);
+          formatted = this.formatWind(column.weather);
           break;
         case 'Cloud Cover':
-          formatted = weather.cloudCover*100;
+          formatted = column.weather.cloudCover*100;
           this.unit = '%';
           break;
         case 'UV Index':
-          formatted = weather.uvIndex;
+          formatted = column.weather.uvIndex;
           break;
         case 'Visibility':
-          formatted = Math.round(weather.visibility);
+          formatted = Math.round(column.weather.visibility);
           this.unit = ' miles';
           break;
         case 'Ozone':
-          formatted = weather.ozone;
+          formatted = column.weather.ozone;
           this.unit = ' DU';
+          break;
+        case 'Climate':
+          formatted = column.climate;
           break;
         default:
           break;

@@ -54,6 +54,7 @@ export default {
       
       this.fetchGeoData(isAway);
       this.fetchWeatherData(isAway);
+      this.fetchClimateData(isAway);
       // this.fetchSunData();
     },
     fetchWeatherData(isAway=false) {
@@ -89,6 +90,25 @@ export default {
       return axios.get(arcGISurl)
         .then(response => {
           this.$store.commit(setStoreMethod, response.data.address.City+', '+response.data.address.Region);
+        });
+    },
+    fetchClimateData(isAway=false) {
+      let setStoreMethod = 'setHomeClimate';
+      let lat = this.homeLocation[0];
+      let lon = this.homeLocation[1];
+
+      if(isAway) {
+        setStoreMethod = 'setAwayClimate';
+        lat = this.awayLocation[0];
+        lon = this.awayLocation[1];
+      }
+
+      let climateUrl = 'http://climateapi.scottpinkelman.com/api/v1/location/'+lat+'/'+lon;
+
+      return axios.get(climateUrl)
+        .then(response => {
+          console.log(response.data);
+          this.$store.commit(setStoreMethod, response.data.return_values[0].zone_description);
         });
     }
   }
