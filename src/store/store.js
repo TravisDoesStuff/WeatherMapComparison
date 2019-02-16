@@ -7,10 +7,12 @@ Vue.use(Vuex);
 
 const state = {
   homeData: {
+    address: '',
     weather: {},
     daylight: {}
   },
   awayData: {
+    address: '',
     weather: {},
     daylight: {}
   }
@@ -45,7 +47,13 @@ const mutations = {
           [key]: data[key]
         }
       }, {});
-  }
+  },
+  setHomeAddress(state, data) {
+    state.homeData.address = data;
+  },
+  setAwayAddress(state, data) {
+    state.awayData.address = data;
+  },
 }
 
 export default new Vuex.Store({

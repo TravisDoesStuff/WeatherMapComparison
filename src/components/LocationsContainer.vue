@@ -24,7 +24,8 @@ export default {
 <style scoped>
 .locationsContainer {
   width: 960px;
-  height: 100%;
+  height: 700px;
   margin: 0 auto;
+  margin-top: 30px;
 }
 </style>

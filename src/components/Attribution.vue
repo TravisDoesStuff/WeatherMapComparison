@@ -3,6 +3,8 @@
     <a href='https://darksky.net/poweredby/'>Powered by Dark Sky</a>
     |
     <a href='https://sunrise-sunset.org/'>Sunrise-Sunset</a>
+    |
+    <a href='https://developers.arcgis.com/rest/'>ArcGIS Rest API</a>
   </div>
 </template>
 

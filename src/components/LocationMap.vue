@@ -52,6 +52,7 @@ export default {
         isAway = true;
       }
       
+      this.fetchGeoData(isAway);
       this.fetchWeatherData(isAway);
       // this.fetchSunData();
     },
@@ -72,6 +73,22 @@ export default {
         .then(response => {
           this.$store.commit(setStoreMethod, response.data.currently);
           this.loading = false;
+        });
+    },
+    fetchGeoData(isAway=false) {
+      let setStoreMethod = 'setHomeAddress';
+      let arcGISlocation = this.homeLocation.slice().reverse();
+
+      if(isAway) {
+        setStoreMethod = 'setAwayAddress';
+        arcGISlocation = this.awayLocation.slice().reverse();
+      }
+
+      let arcGISurl = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location='+arcGISlocation;
+
+      return axios.get(arcGISurl)
+        .then(response => {
+          this.$store.commit(setStoreMethod, response.data.address.City+', '+response.data.address.Region);
         });
     }
   }
