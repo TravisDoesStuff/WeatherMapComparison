@@ -1,12 +1,11 @@
 <template>
   <div class='summaryRow'>
-    <div>
+    <div v-if='this.$store.state.homeData.isLoaded'>
       <div class='locationHeader'>{{ this.$store.state.homeData.address }}</div>
       <div><img class='weatherIcon' :src='getHomeIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.homeData.weather.summary }}</div>
     </div>
-    <div />
-    <div>
+    <div v-if='this.$store.state.awayData.isLoaded'>
       <div class='locationHeader'>{{ this.$store.state.awayData.address }}</div>
       <div><img class='weatherIcon' :src='getAwayIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.awayData.weather.summary }}</div>
@@ -20,10 +19,14 @@ export default {
   name: 'SummaryRow',
   methods: {
     getHomeIcon() {
-      return require('../assets/icons/'+this.$store.state.homeData.weather.icon+'.png');
+      if(this.$store.state.homeData.isLoaded) {
+        return require('../assets/icons/'+this.$store.state.homeData.weather.icon+'.png');
+      }
     },
     getAwayIcon() {
-      return require('../assets/icons/'+this.$store.state.awayData.weather.icon+'.png');
+      if(this.$store.state.awayData.isLoaded) {
+        return require('../assets/icons/'+this.$store.state.awayData.weather.icon+'.png');
+      }
     }
   }
 }

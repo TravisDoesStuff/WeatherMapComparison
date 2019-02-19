@@ -1,5 +1,5 @@
 <template>
-  <div class='locationMap'>
+  <div class='locationMap' v-bind:class='{ expanded: !this.$store.state.homeData.isLoaded && !this.$store.state.awayData.isLoaded }'>
     <l-map :zoom="zoom" :center="center" @click="handleMapClick">
       <l-tile-layer :url="url" :attribution="attribution" class="mapTile"></l-tile-layer>
       <l-marker :lat-lng="homeMarker"></l-marker>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       zoom: 4,
-      center: L.latLng(40, -98),
+      center: L.latLng(38, -98),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:' &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       homeMarker: L.latLng(0, 0),
@@ -107,7 +107,6 @@ export default {
 
       return axios.get(climateUrl)
         .then(response => {
-          console.log(response.data);
           this.$store.commit(setStoreMethod, response.data.return_values[0].zone_description);
         });
     }
@@ -119,5 +118,8 @@ export default {
 .locationMap {
   width: 100%;
   height: 30%;
+}
+.expanded {
+  height: 60%;
 }
 </style>

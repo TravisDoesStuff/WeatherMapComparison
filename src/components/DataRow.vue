@@ -2,9 +2,15 @@
   <div class='dataRow'>
     <div class='label'>{{ label }}</div>
     <div class='datas'>
-      <div class='dataParam'>{{ this.param+this.unit }}</div>
-      <div class='dataParam'>{{ comparisonOperator }}</div>
-      <div class='dataParam'>{{ this.awayParam+this.unit }}</div>
+      <div class='dataParam' v-if='this.param'>
+        {{ this.param+this.unit }}
+      </div>
+      <div class='dataParam' v-if='this.param && this.awayParam'>
+        {{ comparisonOperator }}
+      </div>
+      <div class='dataParam' v-if='this.awayParam'>
+        {{ this.awayParam+this.unit }}
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +24,16 @@ export default {
   ],
   computed: {
     param() {
-      return this.format(this.$store.state.homeData);
+      if(this.$store.state.homeData.isLoaded) {
+        return this.format(this.$store.state.homeData);
+      }
+      return false;
     },
     awayParam() {
-      return this.format(this.$store.state.awayData);
+      if(this.$store.state.awayData.isLoaded) {
+        return this.format(this.$store.state.awayData);
+      }
+      return false;
     },
     comparisonOperator() {
       let operator = '';
@@ -58,6 +70,7 @@ export default {
           break;
         case 'Wind':
           formatted = this.formatWind(column.weather);
+          this.unit = ' mph'
           break;
         case 'Cloud Cover':
           formatted = column.weather.cloudCover*100;
@@ -84,7 +97,7 @@ export default {
       return formatted;
     },
     formatWind(weather) {
-      return this.formatWindDirections(weather.windBearing)+" at "+Math.round(weather.windSpeed)+" mph";
+      return this.formatWindDirections(weather.windBearing)+" at "+Math.round(weather.windSpeed);
     },
     formatWindDirections(degrees) {
       let cardinalDirections = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];

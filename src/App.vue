@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Weather Comparison Map</h1>
     <LocationsContainer />
     <Attribution />
   </div>
@@ -23,5 +24,8 @@ html, body, #app {
   height: 100%;
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
+}
+h1 {
+  text-align: center;
 }
 </style>

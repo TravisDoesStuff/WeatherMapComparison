@@ -7,12 +7,14 @@ Vue.use(Vuex);
 
 const state = {
   homeData: {
+    isLoaded: false,
     address: '',
     weather: {},
     climate: '',
     daylight: {}
   },
   awayData: {
+    isLoaded: false,
     address: '',
     weather: {},
     climate: '',
@@ -39,6 +41,7 @@ const mutations = {
           [key]: data[key]
         }
       }, {});
+    state.homeData.isLoaded = true;
   },
   setAwayWeather(state, data) {
     state.awayData.weather = Object.keys(data)
@@ -49,6 +52,7 @@ const mutations = {
           [key]: data[key]
         }
       }, {});
+    state.awayData.isLoaded = true;
   },
   setHomeAddress(state, data) {
     state.homeData.address = data;
