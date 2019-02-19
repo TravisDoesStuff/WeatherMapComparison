@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Weather Comparison Map</h1>
+    <div class='appHeader'>Weather Comparison Map</div>
     <LocationsContainer />
     <Attribution />
   </div>
@@ -21,11 +21,19 @@ export default {
 
 <style>
 html, body, #app {
-  height: 100%;
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
+  background: azure;
 }
-h1 {
+.appHeader {
+  background: black;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  padding: 20px;
   text-align: center;
+  word-spacing: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class='locationMap' v-bind:class='{ expanded: !this.$store.state.homeData.isLoaded && !this.$store.state.awayData.isLoaded }'>
-    <l-map :zoom="zoom" :center="center" @click="handleMapClick">
+    <l-map :zoom="zoom" :center="center" :zoomControl:setPosition="bottomright" @click="handleMapClick">
       <l-tile-layer :url="url" :attribution="attribution" class="mapTile"></l-tile-layer>
       <l-marker :lat-lng="homeMarker"></l-marker>
       <l-marker :lat-lng="awayMarker"></l-marker>
@@ -118,6 +118,9 @@ export default {
 .locationMap {
   width: 100%;
   height: 30%;
+  border-top: 1px solid grey;
+  border-left: 3px solid grey;
+  box-shadow: 5px 5px 20px silver;
 }
 .expanded {
   height: 60%;

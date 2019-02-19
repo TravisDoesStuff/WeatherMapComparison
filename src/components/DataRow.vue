@@ -123,6 +123,7 @@ export default {
   color: grey;
   font-size: 10px;
   font-weight: bold;
+  margin-left: 10px;
 }
 .datas {
   font-size: 24px;

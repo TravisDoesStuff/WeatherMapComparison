@@ -53,8 +53,24 @@ export default {
 
 <style scoped>
 .dataContainer {
-  height: 400px;
+  height: 397px;
   overflow-y: scroll;
+  border-left: 3px solid grey;
+  box-shadow: 5px 5px 20px silver;
+  background: white;
+}
+.dataContainer::-webkit-scrollbar {
+  width: 7px;
+}
+.dataContainer::-webkit-scrollbar-track {
+  background-color: grey;
+}
+.dataContainer::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 7px;
+}
+.dataContainer::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 #expandButton {
   width: 100%;
