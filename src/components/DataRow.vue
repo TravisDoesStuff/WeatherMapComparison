@@ -1,5 +1,5 @@
 <template>
-  <div class='dataRow'>
+  <div class='dataRow' v-bind:class="{ isEven: this.index%2 === 0 }">
     <div class='label'>{{ label }}</div>
     <div class='datas'>
       <div class='dataParam' v-if='this.param'>
@@ -21,6 +21,7 @@ export default {
   name: 'DataRow',
   props: [
     'label',
+    'index'
   ],
   computed: {
     param() {
@@ -111,7 +112,7 @@ export default {
 
 <style scoped>
 .dataRow {
-  border-bottom: 3px solid silver;
+  border-bottom: 3px solid darkslategray;
   vertical-align: top;
 }
 .datas {
@@ -120,12 +121,15 @@ export default {
   padding: 5px 60px;
 }
 .label {
-  color: grey;
+  color: darkslategray;
   font-size: 10px;
   font-weight: bold;
   margin-left: 10px;
 }
 .datas {
   font-size: 24px;
+}
+.isEven {
+  
 }
 </style>

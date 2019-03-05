@@ -23,17 +23,15 @@ export default {
 html, body, #app {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
-  background: azure;
+  background: floralwhite;
 }
 .appHeader {
   background: black;
   color: white;
-  font-size: 35px;
+  font-size: 26px;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
-  word-spacing: 10px;
   letter-spacing: 1px;
-  margin-bottom: 20px;
 }
 </style>

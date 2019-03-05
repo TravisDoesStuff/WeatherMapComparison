@@ -1,11 +1,11 @@
 <template>
   <div class='summaryRow'>
-    <div v-if='this.$store.state.homeData.isLoaded'>
+    <div v-if='this.$store.state.homeData.isLoaded' class='summary'>
       <div class='locationHeader'>{{ this.$store.state.homeData.address }}</div>
       <div><img class='weatherIcon' :src='getHomeIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.homeData.weather.summary }}</div>
     </div>
-    <div v-if='this.$store.state.awayData.isLoaded'>
+    <div v-if='this.$store.state.awayData.isLoaded' class='summary'>
       <div class='locationHeader'>{{ this.$store.state.awayData.address }}</div>
       <div><img class='weatherIcon' :src='getAwayIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.awayData.weather.summary }}</div>
@@ -36,9 +36,10 @@ export default {
 .summaryRow {
   display: flex;
   justify-content: space-around;
-  padding: 5px 60px;
-  border-bottom: 3px solid grey;
+  border-bottom: 3px solid darkslateblue;
   text-align: center;
+  width: 100%;
+  padding-bottom: 15px;
 }
 .locationHeader {
   font-size: 24px;
@@ -50,5 +51,8 @@ export default {
 }
 .weatherIcon {
   height: 80px;
+}
+.summary {
+  width: 50%;
 }
 </style>

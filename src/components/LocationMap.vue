@@ -138,9 +138,6 @@ export default {
 .locationMap {
   width: 100%;
   height: 30%;
-  border-top: 1px solid grey;
-  border-left: 3px solid grey;
-  box-shadow: 5px 5px 20px silver;
 }
 .expanded {
   height: 60%;

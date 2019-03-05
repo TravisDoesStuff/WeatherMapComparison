@@ -24,9 +24,10 @@ export default {
 
 <style scoped>
 .locationsContainer {
-  width: 960px;
+  max-width: 960px;
   height: 700px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 .prompt {
   text-align: center;

@@ -2,7 +2,7 @@
   <div class='dataContainer'>
     <SummaryRow />
     <DataRow v-for='(label, index) in labels' v-bind:label='label' v-bind:index='index' v-bind:key='index' />
-    <button v-if='!isExpanded' id='expandButton' @click='expand'>Click to expand</button>
+    <button v-if='!isExpanded' id='expandButton' @click='expand'>Click to Expand</button>
     <div v-if='isExpanded' class='expandedData'>
       <DataRow v-for='(expandedLabel, index) in expandedLabels' v-bind:label='expandedLabel' v-bind:index='index' v-bind:key='index' />
     </div>
@@ -53,26 +53,29 @@ export default {
 
 <style scoped>
 .dataContainer {
-  height: 397px;
+  height: 450px;
   overflow-y: scroll;
-  border-left: 3px solid grey;
-  box-shadow: 5px 5px 20px silver;
-  background: white;
+  padding-top: 15px;
 }
 .dataContainer::-webkit-scrollbar {
-  width: 7px;
+  width: 10px;
 }
 .dataContainer::-webkit-scrollbar-track {
-  background-color: grey;
+  background-color: rgba(0,0,0,0);
 }
 .dataContainer::-webkit-scrollbar-thumb {
   background: black;
-  border-radius: 7px;
+  border-radius: 10px;
 }
 .dataContainer::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0,0,0,0.8);
 }
 #expandButton {
   width: 100%;
+  background: rgba(0,0,0,0);
+  border: none;
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
 }
 </style>

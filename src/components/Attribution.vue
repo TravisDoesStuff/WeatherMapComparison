@@ -24,7 +24,7 @@
   text-align: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
-  padding: 30px;
+  padding: 10px;
 }
 a, a:visited {
   color: white;
