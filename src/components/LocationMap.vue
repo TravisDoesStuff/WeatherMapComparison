@@ -1,9 +1,9 @@
 <template>
   <div class='locationMap' v-bind:class='{ expanded: !this.$store.state.homeData.isLoaded && !this.$store.state.awayData.isLoaded }'>
-    <l-map :zoom="zoom" :center="center" :zoomControl:setPosition="bottomright" @click="handleMapClick">
+    <l-map :zoom="zoom" :center="center" @click="handleMapClick">
       <l-tile-layer :url="url" :attribution="attribution" class="mapTile"></l-tile-layer>
-      <l-marker :lat-lng="homeMarker"></l-marker>
-      <l-marker :lat-lng="awayMarker"></l-marker>
+      <l-marker :lat-lng="homeMarker" @click="handleIconClick()"></l-marker>
+      <l-marker :lat-lng="awayMarker" @click="handleIconClick(true)"></l-marker>
     </l-map>
   </div>
 </template>
@@ -56,6 +56,26 @@ export default {
       this.fetchWeatherData(isAway);
       this.fetchClimateData(isAway);
       // this.fetchSunData();
+    },
+    handleIconClick(isAway=false) {
+      if(!isAway) {
+        this.homeLocation = [];
+        this.homeMarker = L.latLng(0, 0);
+      }
+      else {
+        this.awayLocation = [];
+        this.awayMarker = L.latLng(0, 0);
+      }
+
+      this.clearData(isAway);
+    },
+    clearData(isAway=false) {
+      let clearMethod = 'clearHomeData';
+      if(isAway) {
+        clearMethod = 'clearAwayData';
+      }
+
+      this.$store.commit(clearMethod);
     },
     fetchWeatherData(isAway=false) {
       let setStoreMethod = 'setHomeWeather';

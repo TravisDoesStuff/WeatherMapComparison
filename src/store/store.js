@@ -66,6 +66,24 @@ const mutations = {
   setAwayClimate(state, data) {
     state.awayData.climate = data;
   },
+  clearHomeData() {
+    state.homeData = {
+      isLoaded: false,
+      address: '',
+      weather: {},
+      climate: '',
+      daylight: {}
+    }
+  },
+  clearAwayData() {
+    state.awayData = {
+      isLoaded: false,
+      address: '',
+      weather: {},
+      climate: '',
+      daylight: {}
+    }
+  }
 }
 
 export default new Vuex.Store({
