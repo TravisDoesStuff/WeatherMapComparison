@@ -55,6 +55,7 @@ export default {
       this.fetchGeoData(isAway);
       this.fetchWeatherData(isAway);
       this.fetchClimateData(isAway);
+      this.fetchElevationData(isAway);
       // this.fetchSunData();
     },
     handleIconClick(isAway=false) {
@@ -128,6 +129,24 @@ export default {
       return axios.get(climateUrl)
         .then(response => {
           this.$store.commit(setStoreMethod, response.data.return_values[0].zone_description);
+        });
+    },
+    fetchElevationData(isAway=false) {
+      let setStoreMethod = 'setHomeElevation';
+      let lat = this.homeLocation[0];
+      let lon = this.homeLocation[1];
+
+      if(isAway) {
+        setStoreMethod = 'setAwayElevation';
+        lat = this.awayLocation[0];
+        lon = this.awayLocation[1];
+      }
+
+      let elevationUrl = 'https://elevation-api.io/api/elevation?points='+lat+','+lon;
+
+      return axios.get(elevationUrl)
+        .then(response => {
+          this.$store.commit(setStoreMethod, response.data.elevations[0]);
         });
     }
   }

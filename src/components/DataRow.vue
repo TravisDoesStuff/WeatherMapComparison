@@ -3,13 +3,13 @@
     <div class='label'>{{ label }}</div>
     <div class='datas'>
       <div class='dataParam' v-if='this.param'>
-        {{ this.param+this.unit }}
+        {{ this.lead+this.param+this.unit }}
       </div>
       <div class='dataParam' v-if='this.param && this.awayParam'>
         {{ comparisonOperator }}
       </div>
       <div class='dataParam' v-if='this.awayParam'>
-        {{ this.awayParam+this.unit }}
+        {{ this.lead+this.awayParam+this.unit }}
       </div>
     </div>
   </div>
@@ -54,6 +54,7 @@ export default {
   methods: {
     format(column) {
       let formatted = '';
+      this.lead = '';
       this.unit = '';
 
       switch(this.label) {
@@ -70,11 +71,12 @@ export default {
           this.unit = 'mb';
           break;
         case 'Wind':
-          formatted = this.formatWind(column.weather);
+          this.lead = this.formatWind(column.weather);
+          formatted = Math.round(column.weather.windSpeed);
           this.unit = ' mph'
           break;
         case 'Cloud Cover':
-          formatted = column.weather.cloudCover*100;
+          formatted = Math.round(column.weather.cloudCover*100);
           this.unit = '%';
           break;
         case 'UV Index':
@@ -84,12 +86,20 @@ export default {
           formatted = Math.round(column.weather.visibility);
           this.unit = ' miles';
           break;
-        case 'Ozone':
-          formatted = column.weather.ozone;
-          this.unit = ' DU';
-          break;
         case 'Climate':
           formatted = column.climate;
+          break;
+        case 'Latitude':
+          formatted = Math.round(column.elevation.lat*1000)/1000;
+          this.unit = '°'
+          break;
+        case 'Longitude':
+          formatted = Math.round(column.elevation.lon*1000)/1000;
+          this.unit = '°'
+          break;
+        case 'Elevation':
+          formatted = Math.round(column.elevation.elevation * 3.281);
+          this.unit = ' feet';
           break;
         default:
           break;
@@ -98,7 +108,7 @@ export default {
       return formatted;
     },
     formatWind(weather) {
-      return this.formatWindDirections(weather.windBearing)+" at "+Math.round(weather.windSpeed);
+      return this.formatWindDirections(weather.windBearing)+" at ";
     },
     formatWindDirections(degrees) {
       let cardinalDirections = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -118,7 +128,9 @@ export default {
 .datas {
   display: flex;
   justify-content: space-around;
-  padding: 5px 60px;
+  padding: 5px 0;
+  font-size: 24px;
+  text-align: center;
 }
 .label {
   color: darkslategray;
@@ -126,10 +138,7 @@ export default {
   font-weight: bold;
   margin-left: 10px;
 }
-.datas {
-  font-size: 24px;
-}
-.isEven {
-  
+.dataParam {
+  max-width: 40%;
 }
 </style>

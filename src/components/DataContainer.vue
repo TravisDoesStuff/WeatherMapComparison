@@ -23,8 +23,10 @@ const expandedLabels = [
   'Cloud Cover',
   'UV Index',
   'Visibility',
-  'Ozone',
-  'Climate'
+  'Latitude',
+  'Longitude',
+  'Elevation',
+  'Climate',
 ]
 
 export default {

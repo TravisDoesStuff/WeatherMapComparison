@@ -11,6 +11,7 @@ const state = {
     address: '',
     weather: {},
     climate: '',
+    elevation: {},
     daylight: {}
   },
   awayData: {
@@ -18,6 +19,7 @@ const state = {
     address: '',
     weather: {},
     climate: '',
+    elevation: {},
     daylight: {}
   }
 }
@@ -65,6 +67,12 @@ const mutations = {
   },
   setAwayClimate(state, data) {
     state.awayData.climate = data;
+  },
+  setHomeElevation(state, data) {
+    state.homeData.elevation = data;
+  },
+  setAwayElevation(state, data) {
+    state.awayData.elevation = data;
   },
   clearHomeData() {
     state.homeData = {

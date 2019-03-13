@@ -7,6 +7,8 @@
     <a href='https://developers.arcgis.com/rest/' target='_blank'>ArcGIS Rest API</a>
     |
     <a href='http://climateapi.scottpinkelman.com/' target='_blank'>Climate Zone API</a>
+    |
+    <a href='https://elevation-api.io' target='_blank'>Elevation API</a>
   </div>
 </template>
 
