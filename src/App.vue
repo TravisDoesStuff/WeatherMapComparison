@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class='appHeader'>Weather Comparison Map</div>
+    <div class='appHeader'>Cloud2Ground</div>
     <LocationsContainer />
     <Attribution />
   </div>
