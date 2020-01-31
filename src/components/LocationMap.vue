@@ -26,8 +26,8 @@ export default {
     return {
       zoom: 4,
       center: L.latLng(38, -98),
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution:' &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png',
+      attribution:' &copy; Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       homeMarker: L.latLng(0, 0),
       awayMarker: L.latLng(0, 0),
       homeLocation: [],
