@@ -56,7 +56,7 @@ export default {
       this.fetchWeatherData(isAway);
       this.fetchClimateData(isAway);
       this.fetchElevationData(isAway);
-      // this.fetchSunData();
+      this.fetchDaylightData(isAway);
     },
     handleIconClick(isAway=false) {
       if(!isAway) {
@@ -147,6 +147,24 @@ export default {
       return axios.get(elevationUrl)
         .then(response => {
           this.$store.commit(setStoreMethod, response.data.elevations[0]);
+        });
+    },
+    fetchDaylightData(isAway=false) {
+      let setStoreMethod = 'setHomeDaylight';
+      let lat = this.homeLocation[0];
+      let lon = this.homeLocation[1];
+
+      if(isAway) {
+        setStoreMethod = 'setAwayDaylight';
+        lat = this.awayLocation[0];
+        lon = this.awayLocation[1];
+      }
+
+      let sunUrl = 'https://api.sunrise-sunset.org/json?lat='+lat+'&lng='+lon+'&formatted=0&date=today';
+
+      return axios.get(sunUrl)
+        .then(response => {
+          this.$store.commit(setStoreMethod, response.data.results);
         });
     }
   }

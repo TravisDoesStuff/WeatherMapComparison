@@ -1,11 +1,11 @@
 <template>
   <div class='summaryRow'>
-    <div v-if='this.$store.state.homeData.isLoaded' class='summary'>
+    <div v-if='this.$store.state.homeData.isLoaded' class='summary' :class='getDaylightStatus()'>
       <div class='locationHeader'>{{ this.$store.state.homeData.address }}</div>
       <div><img class='weatherIcon' :src='getHomeIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.homeData.weather.summary }}</div>
     </div>
-    <div v-if='this.$store.state.awayData.isLoaded' class='summary'>
+    <div v-if='this.$store.state.awayData.isLoaded' class='summary' :class='getDaylightStatus(true)'>
       <div class='locationHeader'>{{ this.$store.state.awayData.address }}</div>
       <div><img class='weatherIcon' :src='getAwayIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.awayData.weather.summary }}</div>
@@ -27,6 +27,39 @@ export default {
       if(this.$store.state.awayData.isLoaded) {
         return require('../assets/icons/'+this.$store.state.awayData.weather.icon+'.png');
       }
+    },
+    getDaylightStatus(isAway=false) {
+      let daylight;
+      let daylightObj = this.$store.state.homeData.daylight;
+      if(isAway) {
+        daylightObj = this.$store.state.awayData.daylight;
+      }
+      let time = Date.now();
+      if(time <= Date.parse(daylightObj.astronomical_twilight_begin)){
+        daylight = 'night';
+      }
+      else if(time <= Date.parse(daylightObj.nautical_twilight_begin)){
+        daylight = 'astronomical_twilight';
+      }
+      else if(time <= Date.parse(daylightObj.civil_twilight_begin)){
+        daylight = 'nautical_twilight';
+      }
+      else if(time <= Date.parse(daylightObj.sunrise)) {
+        daylight = 'civil_twilight';
+      }
+      else if(time <= Date.parse(daylightObj.sunset)) {
+        daylight = 'daylight';
+      }
+      else if(time <= Date.parse(daylightObj.civil_twilight_end)) {
+        daylight = 'civil_twilight';
+      }
+      else if(time <= Date.parse(daylightObj.nautical_twilight_end)) {
+        daylight = 'nautical_twilight';
+      }
+      else if(time <= Date.parse(daylightObj.astronomical_twilight_end)) {
+        daylight = 'astronomical_twilight';
+      }
+      return daylight;
     }
   }
 }
@@ -54,5 +87,26 @@ export default {
 }
 .summary {
   width: 50%;
+}
+
+.daylight {
+  color: white;
+  background-color: #4A9CFF;
+}
+.civil_twilight {
+  color: white;
+  background-color: #3E82D8;
+}
+.nautical_twilight {
+  color: white;
+  background-color: #2B5B9E;
+}
+.astronomical_twilight {
+  color: white;
+  background-color: #1D3E73;
+}
+.night {
+  color: white;
+  background-color: #10234A;
 }
 </style>

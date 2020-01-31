@@ -74,6 +74,12 @@ const mutations = {
   setAwayElevation(state, data) {
     state.awayData.elevation = data;
   },
+  setHomeDaylight(state, data) {
+    state.homeData.daylight = data;
+  },
+  setAwayDaylight(state, data) {
+    state.awayData.daylight = data;
+  },
   clearHomeData() {
     state.homeData = {
       isLoaded: false,
