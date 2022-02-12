@@ -5,11 +5,6 @@
       <div><img class='weatherIcon' :src='getHomeIcon()'></div>
       <div class='locationCondition'>{{ this.$store.state.homeData.weather.summary }}</div>
     </div>
-    <div v-if='this.$store.state.awayData.isLoaded' class='summary' :class='getDaylightStatus(true)'>
-      <div class='locationHeader'>{{ this.$store.state.awayData.address }}</div>
-      <div><img class='weatherIcon' :src='getAwayIcon()'></div>
-      <div class='locationCondition'>{{ this.$store.state.awayData.weather.summary }}</div>
-    </div>
   </div>
 </template>
 
@@ -20,20 +15,12 @@ export default {
   methods: {
     getHomeIcon() {
       if(this.$store.state.homeData.isLoaded) {
-        return require('../assets/icons/'+this.$store.state.homeData.weather.icon+'.png');
+        // return require('../assets/icons/'+this.$store.state.homeData.weather.main+'.png');
       }
     },
-    getAwayIcon() {
-      if(this.$store.state.awayData.isLoaded) {
-        return require('../assets/icons/'+this.$store.state.awayData.weather.icon+'.png');
-      }
-    },
-    getDaylightStatus(isAway=false) {
+    getDaylightStatus() {
       let daylight;
       let daylightObj = this.$store.state.homeData.daylight;
-      if(isAway) {
-        daylightObj = this.$store.state.awayData.daylight;
-      }
       let time = Date.now();
       if(time <= Date.parse(daylightObj.astronomical_twilight_begin)){
         daylight = 'night';

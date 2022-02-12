@@ -1,6 +1,6 @@
 <template>
   <div id='attribution'>
-    <a href='https://darksky.net/poweredby/' target='_blank'>Powered by Dark Sky</a>
+    <a href='https://openweathermap.org/' target='_blank'>OpenWeather</a>
     |
     <a href='https://sunrise-sunset.org/' target='_blank'>Sunrise-Sunset</a>
     |

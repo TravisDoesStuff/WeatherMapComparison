@@ -5,12 +5,6 @@
       <div class='dataParam' v-if='this.param'>
         {{ this.lead+this.param+this.unit }}
       </div>
-      <div class='dataParam' v-if='this.param && this.awayParam'>
-        {{ comparisonOperator }}
-      </div>
-      <div class='dataParam' v-if='this.awayParam'>
-        {{ this.lead+this.awayParam+this.unit }}
-      </div>
     </div>
   </div>
 </template>
@@ -29,26 +23,6 @@ export default {
         return this.format(this.$store.state.homeData);
       }
       return false;
-    },
-    awayParam() {
-      if(this.$store.state.awayData.isLoaded) {
-        return this.format(this.$store.state.awayData);
-      }
-      return false;
-    },
-    comparisonOperator() {
-      let operator = '';
-      if(!isNaN(this.param) && !isNaN(this.awayParam)) {
-        if(this.param > this.awayParam) {
-        operator = '>';
-        } else if(this.param < this.awayParam) {
-          operator = '<';
-        } else {
-          operator = '=';
-        }
-      }
-
-      return operator;
     }
   },
   methods: {
@@ -59,32 +33,29 @@ export default {
 
       switch(this.label) {
         case 'Temperature':
-          formatted = Math.round(column.weather.temperature);
+          formatted = Math.round(column.weather.main.temp);
           this.unit = '°F';
           break;
-        case 'Dew Point':
-          formatted = Math.round(column.weather.dewPoint);
+        case 'Feels Like':
+          formatted = Math.round(column.weather.main.feels_like);
           this.unit = '°F';
           break;
         case 'Pressure':
-          formatted = Math.round(column.weather.pressure);
-          this.unit = 'mb';
+          formatted = Math.round(column.weather.main.pressure);
+          this.unit = 'hPa';
           break;
         case 'Wind':
-          this.lead = this.formatWind(column.weather);
-          formatted = Math.round(column.weather.windSpeed);
+          this.lead = this.formatWind(column.weather.wind.deg);
+          formatted = Math.round(column.weather.wind.speed);
           this.unit = ' mph'
           break;
         case 'Cloud Cover':
-          formatted = Math.round(column.weather.cloudCover*100);
+          formatted = Math.round(column.weather.clouds.all);
           this.unit = '%';
-          break;
-        case 'UV Index':
-          formatted = column.weather.uvIndex;
           break;
         case 'Visibility':
           formatted = Math.round(column.weather.visibility);
-          this.unit = ' miles';
+          this.unit = ' meters';
           break;
         case 'Climate':
           formatted = column.climate;
@@ -107,8 +78,8 @@ export default {
 
       return formatted;
     },
-    formatWind(weather) {
-      return this.formatWindDirections(weather.windBearing)+" at ";
+    formatWind(windHeading) {
+      return this.formatWindDirections(windHeading)+" at ";
     },
     formatWindDirections(degrees) {
       let cardinalDirections = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];

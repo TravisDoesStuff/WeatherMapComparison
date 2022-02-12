@@ -11,6 +11,6 @@ Some additional statistics have been or will be added in the future include clim
 ## Installation
 * Clone repository into local environment.
 * Run `npm install`
-* Get a DarkSky API key [here](https://darksky.net/dev)
+* Get an OpenWeather API key [here](https://openweathermap.org/api)
 * Add key to local environment
 * Run `npm run serve` to boot up local server on `localhost:8080`

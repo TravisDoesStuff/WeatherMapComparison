@@ -1,7 +1,7 @@
 <template>
   <div class='locationsContainer'>
     <LocationMap />
-    <DataContainer v-if='this.$store.state.homeData.isLoaded || this.$store.state.awayData.isLoaded' />
+    <DataContainer v-if='this.$store.state.homeData.isLoaded' />
     <div v-else class='prompt'>Click on a location to get started.</div>
   </div>
 </template>
