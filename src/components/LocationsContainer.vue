@@ -1,8 +1,7 @@
 <template>
   <div class='locationsContainer'>
+    <DataContainer />
     <LocationMap />
-    <DataContainer v-if='this.$store.state.homeData.isLoaded' />
-    <div v-else class='prompt'>Click on a location to get started.</div>
   </div>
 </template>
 
@@ -24,10 +23,12 @@ export default {
 
 <style scoped>
 .locationsContainer {
-  max-width: 960px;
-  height: 700px;
+  min-width: 960px;
+  height: 100%;
   margin: 0 auto;
   overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
 }
 .prompt {
   text-align: center;

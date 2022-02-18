@@ -1,5 +1,5 @@
 <template>
-  <div class='dataRow' v-bind:class="{ isEven: this.index%2 === 0 }">
+  <div class='dataRow'>
     <div class='label'>{{ label }}</div>
     <div class='datas'>
       <div class='dataParam' v-if='this.param'>
@@ -60,14 +60,6 @@ export default {
         case 'Climate':
           formatted = column.climate;
           break;
-        case 'Latitude':
-          formatted = Math.round(column.elevation.lat*1000)/1000;
-          this.unit = '°'
-          break;
-        case 'Longitude':
-          formatted = Math.round(column.elevation.lon*1000)/1000;
-          this.unit = '°'
-          break;
         case 'Elevation':
           formatted = Math.round(column.elevation.elevation * 3.281);
           this.unit = ' feet';
@@ -98,10 +90,8 @@ export default {
 }
 .datas {
   display: flex;
-  justify-content: space-around;
   padding: 5px 0;
-  font-size: 24px;
-  text-align: center;
+  font-size: 18px;
 }
 .label {
   color: darkslategray;
@@ -110,6 +100,6 @@ export default {
   margin-left: 10px;
 }
 .dataParam {
-  max-width: 40%;
+  margin-left: 25px;
 }
 </style>

@@ -16,8 +16,6 @@ const labels = [
   'Wind',
   'Cloud Cover',
   'Visibility',
-  'Latitude',
-  'Longitude',
   'Elevation',
   'Climate',
 ];
@@ -41,9 +39,13 @@ export default {
 
 <style scoped>
 .dataContainer {
-  height: 450px;
+  width: 25%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   overflow-y: scroll;
-  padding-top: 15px;
+  background-color: black;
+  color: white;
 }
 .dataContainer::-webkit-scrollbar {
   width: 10px;

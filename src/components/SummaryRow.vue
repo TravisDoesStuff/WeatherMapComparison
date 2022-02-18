@@ -1,9 +1,11 @@
 <template>
   <div class='summaryRow'>
-    <div v-if='this.$store.state.homeData.isLoaded' class='summary' :class='getDaylightStatus()'>
+    <div v-if='this.$store.state.homeData.isLoaded' class='summary'>
+      <div :class='getDaylightStatus()'></div>
       <div class='locationHeader'>{{ this.$store.state.homeData.address }}</div>
+      <div class='locationCoordinates'>{{ Math.round(this.$store.state.homeData.elevation.lat*10000)/10000 }}, {{ Math.round(this.$store.state.homeData.elevation.lon*10000)/10000 }}</div>
       <div><img class='weatherIcon' :src='getHomeIcon()'></div>
-      <div class='locationCondition'>{{ this.$store.state.homeData.weather.summary }}</div>
+      <div class='locationCondition'>{{ this.$store.state.homeData.weather.weather[0].description }}</div>
     </div>
   </div>
 </template>
@@ -15,8 +17,24 @@ export default {
   methods: {
     getHomeIcon() {
       if(this.$store.state.homeData.isLoaded) {
-        // return require('../assets/icons/'+this.$store.state.homeData.weather.main+'.png');
+        return require('../assets/icons/'+this.handleWeatherIcon(this.$store.state.homeData.weather.weather[0].id)+'.png');
       }
+    },
+    handleWeatherIcon(code) {
+        let icon = 'clear-night';
+        if(code < 600) {
+          icon = 'rain';
+        } else if(code < 700) {
+          icon = 'snow';
+        } else if(code < 800) {
+          icon = 'fog';
+        } else if(code === 800) {
+          icon = 'clear-day';
+        } else {
+          icon = 'clouds';
+        }
+
+        return icon
     },
     getDaylightStatus() {
       let daylight;
@@ -54,17 +72,13 @@ export default {
 
 <style scoped>
 .summaryRow {
-  display: flex;
-  justify-content: space-around;
   border-bottom: 3px solid darkslateblue;
-  text-align: center;
   width: 100%;
   padding-bottom: 15px;
 }
 .locationHeader {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 15px;
 }
 .locationCondition {
   font-size: 24px;
@@ -73,27 +87,27 @@ export default {
   height: 80px;
 }
 .summary {
-  width: 50%;
+  /* width: 50%; */
 }
 
 .daylight {
-  color: white;
   background-color: #4A9CFF;
+  height: 15px;
 }
 .civil_twilight {
-  color: white;
   background-color: #3E82D8;
+  height: 15px;
 }
 .nautical_twilight {
-  color: white;
   background-color: #2B5B9E;
+  height: 15px;
 }
 .astronomical_twilight {
-  color: white;
   background-color: #1D3E73;
+  height: 15px;
 }
 .night {
-  color: white;
   background-color: #10234A;
+  height: 15px;
 }
 </style>

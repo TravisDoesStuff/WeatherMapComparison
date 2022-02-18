@@ -129,6 +129,6 @@ export default {
 <style scoped>
 .locationMap {
   width: 100%;
-  height: 60%;
+  height: 100%;
 }
 </style>
