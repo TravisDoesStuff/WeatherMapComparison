@@ -2,7 +2,7 @@
 
 The purpose of this project is to take what I have learned through a few take-home assignments, Leaflet and Vue.js, and apply to an application.
 
-Two maps are displayed side-by-side where the user can select a "home" location and an "away" location to compare the weather between them. This was also inspired by the "bomb-cyclone" event in early 2019 where the Midwest and East were hit with frigid temperatures while home in Colorado was relatively mild.
+A map is displayed where the user can select an area to get weather and geographical data.
 
 <img src="/compareDemo.png">
 

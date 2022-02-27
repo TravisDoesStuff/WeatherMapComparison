@@ -92,6 +92,7 @@ export default {
   display: flex;
   padding: 5px 0;
   font-size: 18px;
+  min-height: 18px;
 }
 .label {
   color: darkslategray;
